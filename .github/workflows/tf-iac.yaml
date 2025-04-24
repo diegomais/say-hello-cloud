@@ -1,0 +1,58 @@
+name: Terraform
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "tf-iac/**"
+
+  push:
+    branches: [ "main" ]
+    paths:
+      - "tf-iac/**"
+    
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: tf-iac
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.ROLE_TO_ASSUME }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ vars.TF_VERSION }}
+
+      - name: Check files format
+        run: terraform fmt -check
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Validate files
+        run: terraform validate -no-color
+      
+      - name: Generate execution plan
+        run: terraform plan -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
+
+      - name: Apply changes
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
