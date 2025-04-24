@@ -5,6 +5,12 @@ terraform {
       version = "5.95.0"
     }
   }
+
+  backend "s3" {
+    bucket = "say-hello-cloud-iac"
+    key    = "state/terraform.tfstate"
+    region = "us-east-2"
+  }
 }
 
 provider "aws" {
