@@ -135,3 +135,26 @@ resource "aws_iam_role" "ecr-role" {
     ManagedBy   = "Terraform"
   }
 }
+
+resource "aws_iam_role" "app-runner-role" {
+  name = "app-runner-role"
+
+  assume_role_policy = jsonencode({
+    Statement = [
+      {
+        Sid    = "Statement1"
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "build.apprunner.amazonaws.com"
+        }
+      },
+    ]
+    Version = "2012-10-17"
+  })
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"]
+  tags = {
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
