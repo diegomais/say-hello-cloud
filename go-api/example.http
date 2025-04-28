@@ -3,3 +3,6 @@ GET http://localhost:8080/hello HTTP/1.1
 
 ### Custom name: Hello, GoDev!
 GET http://localhost:8080/hello?name=GoDev HTTP/1.1
+
+### Custom name: Hello, DevOps!
+GET http://localhost:8080/hello?name=DevOps HTTP/1.1
