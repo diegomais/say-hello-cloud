@@ -83,7 +83,7 @@ jobs:
         TAG: ${{ steps.generate_tag.outputs.sha }}
       run: |
         docker build -t $REGISTRY/say-hello-cloud-api:$TAG .
-        docker tag -t $REGISTRY/say-hello-cloud-api:$TAG $REGISTRY/say-hello-cloud-api:latest
+        docker tag $REGISTRY/say-hello-cloud-api:$TAG $REGISTRY/say-hello-cloud-api:latest
         docker push --all-tags $REGISTRY/say-hello-cloud-api
         IMAGE=$(echo $REGISTRY/say-hello-cloud-api:$TAG)
         echo "image=$IMAGE" >> $GITHUB_OUTPUT
