@@ -70,7 +70,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: ${{ secrets.AWS_REGION }}
-        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_ECR }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.ROLE_TO_ASSUME_ECR }}
 
     - name: Login to AWS ECR
       id: login-ecr
@@ -92,7 +92,7 @@ jobs:
       id: deploy-app-runner
       uses: awslabs/amazon-app-runner-deploy@main
       with:
-        access-role-arn: ${{ secrets.ROLE_TO_ASSUME_APP }}
+        access-role-arn: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.ROLE_TO_ASSUME_APP }}
         region: ${{ secrets.AWS_REGION }}
         service: ${{ vars.SERVICE_NAME }}
         image: ${{ steps.build-docker-image.outputs.image }}
