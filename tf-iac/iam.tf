@@ -80,6 +80,8 @@ resource "aws_iam_role" "ecr-role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+          },
+          StringLike = {
             "token.actions.githubusercontent.com:sub" = "repo:diegomais/say-hello-cloud:*"
           }
         }
