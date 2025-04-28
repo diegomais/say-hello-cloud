@@ -1,5 +1,5 @@
-### Default
+### Default: Hello, world!
 GET http://localhost:8080/hello HTTP/1.1
 
-### Custom name
+### Custom name: Hello, DevOps!
 GET http://localhost:8080/hello?name=DevOps HTTP/1.1
