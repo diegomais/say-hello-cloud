@@ -63,3 +63,25 @@ The API exposes one main endpoint:
 > (Note: Replace `localhost:8080` with the actual host and port if it differs)
 
 Feel free to adjust the port number, Go version details, or add more specific instructions based on your `main.go` file and project setup.
+
+## :thinking: Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1.  **Fork** the repository on GitHub.
+2.  **Clone** your forked repository locally.
+3.  Create a new **branch** for your feature or bug fix (`git checkout -b my-new-feature`).
+4.  Make your changes and **commit** them (`git commit -am '[feat](scope): add some feature'`).
+5.  Ensure all **tests pass** (`go test`).
+6.  **Push** your changes to your fork (`git push origin my-new-feature`).
+7.  Create a **Pull Request** on the original repository.
+
+Please ensure your code follows Go best practices and includes tests for new functionality.
+
+## :memo: License
+
+This project is under the MIT license. See the [LICENSE](LICENSE) for more details.
+
+---
+
+Made with :heart: by [Diego Mais](https://diegomais.github.io/) :wave:.
